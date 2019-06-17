@@ -25,32 +25,39 @@
 </template>
 
 <script>
-import UserSettingsDialog from '../UserSettings/UserSettingsDialog.vue';
+// import UserSettingsDialog from '../UserSettings/UserSettingsDialog.vue';
 
 export default {
   components: {
-    'User-Settings-Dialog': UserSettingsDialog
+    // 'User-Settings-Dialog': UserSettingsDialog
   },
-  props: ['buttonConfig', 'onSymbolUpdate', 'selectBlotter', 'tradeExecuted', 'closeTradeTicket', 'launchPM'],
-  data () {
+  props: [
+    "buttonConfig",
+    "onSymbolUpdate",
+    "selectBlotter",
+    "tradeExecuted",
+    "closeTradeTicket",
+    "launchPM"
+  ],
+  data() {
     return {
       blotters: [
         {
-          name: 'PM Blotter'
+          name: "PM Blotter"
         },
         {
-          name: 'Desk Blotter'
+          name: "Desk Blotter"
         }
       ],
-      selectedBlotter:''
-    }
+      selectedBlotter: ""
+    };
   }
-}
+};
 </script>
 
 <style>
-  .detail-group-items{
-    margin-right:-6px;
-    font-size:11px;
-  }
+.detail-group-items {
+  margin-right: -6px;
+  font-size: 11px;
+}
 </style>
