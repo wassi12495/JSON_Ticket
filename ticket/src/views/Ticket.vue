@@ -1,10 +1,8 @@
 <template>
-
-  <h1>Home Page</h1>
-  
+  <h1>Ticket</h1>
 </template>
 
-<script lang="ts">
+<script>
 export default {};
 </script>
 

@@ -1,6 +1,6 @@
 import Vue from "vue"
 import Router from "vue-router"
-import Home from "./views/Home.vue"
+import Ticket from "./views/Ticket.vue"
 
 Vue.use(Router)
 
@@ -10,8 +10,13 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "home",
-      component: Home,
+      name: "Home",
+      component: () => import("./views/Home.vue"),
+    },
+    {
+      path: "/ticket",
+      name: "Ticket",
+      component: () => import("./views/Ticket.vue"),
     },
     {
       path: "/about",
