@@ -1,0 +1,17 @@
+let express = require("express")
+let app = express()
+let cors = require("cors")
+let http = require("http")
+let mysql = require("mysql")
+let helmet = require("helmet")
+let bodyParser = require("body-parser")
+let { router } = require("./routes.js")
+
+app.use(cors())
+app.use(helmet())
+app.use("/", router)
+app.use(bodyParser.json)
+app.use(bodyParser.urlencoded({ extended: true }))
+
+let server = http.createServer(app)
+server.listen(9000)
