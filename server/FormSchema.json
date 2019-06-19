@@ -18,24 +18,27 @@
       "description": "quantity"
     },
     "notional": {
-      "type": "",
-      "description": ""
+      "type": "number",
+      "description": "Notional value"
     },
     "orderType": {
-      "type": "",
-      "description": ""
+      "type": "string",
+      "description": "Order Type",
+      "enum": ["LMT", "MKT"]
     },
     "price": {
-      "type": "",
-      "description": ""
+      "type": "number",
+      "description": "Price"
     },
     "strategy1": {
-      "type": "",
-      "description": ""
+      "type": "string",
+      "description": "",
+      "enum": ["sub A", "sub B"]
     },
     "strategy2": {
-      "type": "",
-      "description": ""
+      "type": "string",
+      "description": "",
+      "enum": ["sub C", "sub D"]
     },
     "instructions": {
       "type": "",
@@ -50,8 +53,9 @@
       "description": ""
     },
     "tradeType": {
-      "type": "",
-      "description": ""
+      "type": "string",
+      "description": "Type of trade ",
+      "enum": ["BUY", "COVER", "SELL", "SHORT"]
     },
     "portfolio": {
       "type": "",
