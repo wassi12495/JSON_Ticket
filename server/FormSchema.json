@@ -2,49 +2,65 @@
   "type": "object",
   "properties": {
     "symbol": {
-      "type": ""
+      "type": "string",
+      "description": "Stock symbol"
     },
     "bps": {
-      "type": ""
+      "type": "number",
+      "description": "Basis points"
     },
     "targetBps": {
-      "type": ""
+      "type": "number",
+      "description": "Target basis points"
     },
-    "quantityData": {
-      "type": ""
+    "quantity": {
+      "type": "number",
+      "description": "quantity"
     },
     "notional": {
-      "type": ""
+      "type": "",
+      "description": ""
     },
     "orderType": {
-      "type": ""
+      "type": "",
+      "description": ""
     },
     "price": {
-      "type": ""
+      "type": "",
+      "description": ""
     },
     "strategy1": {
-      "type": ""
+      "type": "",
+      "description": ""
     },
     "strategy2": {
-      "type": ""
+      "type": "",
+      "description": ""
     },
     "instructions": {
-      "type": ""
+      "type": "",
+      "description": ""
     },
     "gtc": {
-      "type": ""
+      "type": "",
+      "description": ""
     },
     "isSwap": {
-      "type": ""
+      "type": "",
+      "description": ""
     },
     "tradeType": {
-      "type": ""
+      "type": "",
+      "description": ""
     },
     "portfolio": {
-      "type": ""
+      "type": "",
+      "description": ""
     },
     "uniqueStrategy": {
-      "type": ""
+      "type": "",
+      "description": ""
     }
-  }
+  },
+  "required": ["symbol", "bps", "targetBps"]
 }
