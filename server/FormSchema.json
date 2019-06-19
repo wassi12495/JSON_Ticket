@@ -1,0 +1,50 @@
+{
+  "type": "object",
+  "properties": {
+    "symbol": {
+      "type": ""
+    },
+    "bps": {
+      "type": ""
+    },
+    "targetBps": {
+      "type": ""
+    },
+    "quantityData": {
+      "type": ""
+    },
+    "notional": {
+      "type": ""
+    },
+    "orderType": {
+      "type": ""
+    },
+    "price": {
+      "type": ""
+    },
+    "strategy1": {
+      "type": ""
+    },
+    "strategy2": {
+      "type": ""
+    },
+    "instructions": {
+      "type": ""
+    },
+    "gtc": {
+      "type": ""
+    },
+    "isSwap": {
+      "type": ""
+    },
+    "tradeType": {
+      "type": ""
+    },
+    "portfolio": {
+      "type": ""
+    },
+    "uniqueStrategy": {
+      "type": ""
+    }
+  }
+}
