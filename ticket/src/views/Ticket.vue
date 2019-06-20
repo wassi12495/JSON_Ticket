@@ -3,6 +3,7 @@
 
     <h1>Ticket</h1>
     <button @click="onClick">click this</button>
+    <TicketForm/>
 
   </div>
 </template>
@@ -14,7 +15,11 @@ import { State, Getter, Action, Mutation } from "vuex-class";
 import { Watch } from "vue-property-decorator";
 
 import TicketForm from "../components/ticketForm.vue";
-@Component({})
+@Component({
+  components: {
+    TicketForm
+  }
+})
 export default class Ticket extends Vue {
   @Action("getSchema") getSchema: any;
   @State("formSchema") formSchema: any;

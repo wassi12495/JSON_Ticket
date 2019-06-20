@@ -4,6 +4,18 @@
       <div class="row">
         <div class="form-group col">
           <label for="Symbol">Symbol</label>
+          <input type="text" v-model="symbol">
+          <label for="BPS">BPS</label>
+          <input type="text" v-model="bps">
+          <label for="tgtBps">tgtBps</label>
+          <input type="text" v-model="tgtBps">
+          <label for="Symbol">Symbol</label>
+          <input type="text">
+          <label for="Symbol">Symbol</label>
+          <input type="text">
+          <label for="Symbol">Symbol</label>
+          <input type="text">
+          <label for="Symbol">Symbol</label>
           <input type="text">
         </div>
       </div>
