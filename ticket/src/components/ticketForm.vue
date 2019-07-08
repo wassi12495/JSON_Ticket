@@ -1,75 +1,133 @@
 <template>
-  <div>
+  <div class="container">
     <form action @submit="handleSubmit($event)">
       <div class="row">
         <div class="form-group col">
-          <label for="Symbol">Symbol</label>
-          <v-text-field type="text" v-model="symbol"/>
-          <label for="BPS">BPS</label>
-          <v-text-field type="text" v-model="bps"/>
-          <label for="tgtBps">tgtBps</label>
-          <v-text-field type="text" v-model="tgtBps"/>
-          <label for="quantity">quantity</label>
-          <v-text-field type="text" v-model="quantity"/>
-          <label for="notional">notional</label>
-          <v-text-field type="text" v-model="notional"/>
-          <label for="orderType">orderType</label>
-          <v-text-field type="text" v-model="orderType"/>
+          <label for="first">Symbol</label>
+          <input type="text" class="form-control" placeholder="Symbol" v-model="symbol" required>
         </div>
-        <div class="row">
+        <div class="form-group col">
+          <label for="last">bps</label>
+          <input type="text" class="form-control" placeholder="bps" v-model="bps" required>
+        </div>
+        <div class="form-group col">
+          <label for="tgtBps">tgtBps</label>
+          <input type="text" v-model="tgtBps"/>
+
+        </div>
+        <div class="form-group col">
+          <label for="quantity">quantity</label>
+          <input type="text" v-model="quantity"/>
+
+        </div>
+        <div class="form-group col">
+          <label for="notional">notional</label>
+          <input type="text" v-model="notional"/>
+
+        </div>
+        <div class="form-group col">
+
+          <label for="orderType">orderType</label>
+          <input type="text" v-model="orderType"/>
+        </div>
+        <div class="form-group col">
           <label for="price">price</label>
           <input type="text" v-model="price">
+
+        </div>
+        <div class="form-group col">
           <label for="strat1">strat1</label>
           <input type="text" v-model="strat1">
+
+        </div>
+        <div class="form-group col">
           <label for="strat2">strat2</label>
           <input type="text" v-model="strat2">
+
+        </div>
+        <div class="form-group col">
+
           <label for="type">type</label>
           <input type="text" v-model="type">
+        </div>
+        <div class="form-control col">
           <label for="portfolio">portfolio</label>
           <input type="text" v-model="portfolio">
+        </div>          
+        <div class="form-control col">
           <label for="isSwap">isSwap</label>
           <input type="text" v-model="isSwap">
-          
-        </div>
-       <input class="btn btn-primary" type="submit">
-
+        </div> 
+                 
       </div>
+        <div>
+
+       <input class="btn btn-primary" type="submit">
+        </div>
+
     </form>
   </div>
   
 </template>
 
-<script lang="ts">
+<script>
 import Vue from "vue";
+import { mapState } from "vuex";
 import Component from "vue-class-component";
 import { State, Getter, Action, Mutation } from "vuex-class";
 import { Watch } from "vue-property-decorator";
 
-@Component({})
-export default class TicketForm extends Vue {
-  @State("formSchema") formSchema: any;
-
-  private symbol: any = null;
-  private bps: any = null;
-  private tgtBps: any = null;
-  private quantity: any = null;
-  private notional: any = null;
-  private orderType: any = null;
-  private price: any = null;
-  private strat1: any = null;
-  private strat2: any = null;
-  private type: any = null;
-  private portfolio: any = null;
-  private isSwap: any = null;
-
-  handleSubmit = (e: any) => {
-    console.log(e);
-  };
-  @Watch("symbol")
-  onSymbolChange() {
-    console.log(this.symbol);
+export default {
+  // @State("formSchema") formSchema: any;
+  name: "ticketForm",
+  data() {
+    return {
+      symbol: null,
+      bps: null,
+      tgtBps: null,
+      quantity: null,
+      notional: null,
+      orderType: null,
+      price: null,
+      strat1: null,
+      strat2: null,
+      type: null,
+      portfolio: null,
+      isSwap: null
+    };
+  },
+  computed: {
+    ...mapState(["formSchema"])
+  },
+  methods: {
+    handleSubmit(e) {
+      e.preventDefault();
+      console.log(e);
+      console.log("Symbol", this.symbol);
+      console.log("bps", this.bps);
+      const ticketData = {
+        symbol,
+        bps,
+        tgtBps,
+        quantity,
+        notional,
+        orderType,
+        price,
+        astrat1,
+        strat2,
+        type,
+        portfolio,
+        isSwap
+      };
+      console.log("ticket data", ticketData);
+    }
   }
-}
+
+  // @Watch("symbol")
+  // onSymbolChange() {
+  //   console.log(this.symbol);
+  // }
+};
 </script>
 
 <style>
