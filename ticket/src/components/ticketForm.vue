@@ -3,25 +3,25 @@
     <form action @submit="handleSubmit($event)">
       <div class="row">
         <div class="form-group col">
-          <label for="first">Symbol</label>
+          <label for="first">Symbol: </label>   
           <input type="text" class="form-control" placeholder="Symbol" v-model="symbol" required>
         </div>
         <div class="form-group col">
-          <label for="last">bps</label>
+          <label for="last">bps: </label>
           <input type="text" class="form-control" placeholder="bps" v-model="bps" required>
         </div>
         <div class="form-group col">
-          <label for="tgtBps">tgtBps</label>
+          <label for="tgtBps">tgtBps: </label>   
           <input type="text" v-model="tgtBps"/>
 
         </div>
         <div class="form-group col">
-          <label for="quantity">quantity</label>
+          <label for="quantity">quantity: </label>  
           <input type="text" v-model="quantity"/>
 
         </div>
         <div class="form-group col">
-          <label for="notional">notional</label>
+          <label for="notional">notional: </label>
           <input type="text" v-model="notional"/>
 
         </div>
@@ -72,7 +72,7 @@
 
 <script>
 import Vue from "vue";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 import Component from "vue-class-component";
 import { State, Getter, Action, Mutation } from "vuex-class";
 import { Watch } from "vue-property-decorator";
@@ -100,26 +100,28 @@ export default {
     ...mapState(["formSchema"])
   },
   methods: {
+    ...mapActions(["submitForm"]),
     handleSubmit(e) {
       e.preventDefault();
       console.log(e);
       console.log("Symbol", this.symbol);
       console.log("bps", this.bps);
       const ticketData = {
-        symbol,
-        bps,
-        tgtBps,
-        quantity,
-        notional,
-        orderType,
-        price,
-        astrat1,
-        strat2,
-        type,
-        portfolio,
-        isSwap
+        symbol: this.symbol,
+        bps: this.bps,
+        tgtBps: this.tgtBps,
+        quantity: this.quantity,
+        notional: this.notional,
+        orderType: this.orderType,
+        price: this.price,
+        strat1: this.strat1,
+        strat2: this.strat2,
+        type: this.type,
+        portfolio: this.portfolio,
+        isSwap: this.isSwap
       };
       console.log("ticket data", ticketData);
+      this.submitForm(ticketData);
     }
   }
 

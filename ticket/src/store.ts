@@ -30,5 +30,22 @@ export default new Vuex.Store({
           commit('formSchema', res);
         });
     },
+    submitForm({ commit }: any, data: any) {
+      // commit('miscAsyncInProgress');
+      fetch('http://localhost:9000/ticket', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+        .then(resp => {
+          return resp.json();
+        })
+        .then(resp => {
+          console.log(resp);
+          debugger;
+        });
+    },
   },
 });
