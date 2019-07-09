@@ -4,11 +4,11 @@
       <div class="row">
         <div class="form-group col">
           <label for="first">Symbol: </label>   
-          <input type="text" class="form-control" placeholder="Symbol" v-model="symbol" required>
+          <input type="text" class="form-control" id="symbol" placeholder="Symbol" v-model="symbol" required>
         </div>
         <div class="form-group col">
           <label for="last">bps: </label>
-          <input type="text" class="form-control" placeholder="bps" v-model="bps" required>
+          <input type="text" class="form-control" id="bps" placeholder="bps" v-model="bps" required>
         </div>
         <div class="form-group col">
           <label for="tgtBps">tgtBps: </label>   
@@ -80,7 +80,39 @@ import { Watch } from "vue-property-decorator";
 @Component({})
 export default class ticketForm extends Vue {
   @State("formSchema") formSchema: any;
+  @Action("getSchema") getSchema: any;
   @Action("submitForm") submitForm: any;
+  private schema: any;
+
+  created() {
+    this.schema = this.formSchema.properties;
+    console.log("created ticket form", this.schema);
+    // let properties = Object.entries(this.schema);
+    // for (const [key, value] of properties) {
+    //   console.log(key);
+    //   debugger;
+    //   // console.log(this.$data.);
+
+    //   this.validateInitVariableType(value.type);
+    //   debugger;
+    // }
+
+    // debugger;
+  }
+  // mounted(){
+  //   let properties = Object.entries(this.schema);
+  //   for (const [key, value] of properties) {
+  //     console.log(key);
+  //     let formInputForKey = document.getElementById(`${key}`)
+  //     debugger;
+  //     // console.log(this.$data.);
+
+  //     this.validateInitVariableType(value.type, formInputForKey.);
+  //     debugger;
+  //   }
+
+  //   debugger;
+  // }
 
   private symbol: any = null;
   private bps: any = null;
@@ -94,11 +126,32 @@ export default class ticketForm extends Vue {
   private type: any = null;
   private portfolio: any = null;
   private isSwap: any = null;
+
+  validateInitVariableType(expectation: any, reality: any) {
+    console.log("Expectation", expectation);
+    console.log("Reality", reality);
+  }
+
+  validateBeforeSubmit() {
+    let properties = Object.entries(this.schema);
+    for (const [key, value] of properties) {
+      console.log(key);
+      debugger;
+      // console.log(this.$data.);
+    }
+  }
+  @Watch("formSchema")
+  onFormSchema() {
+    console.log("Form Schema recieved", this.formSchema);
+  }
+
   handleSubmit(e: any) {
     e.preventDefault();
     console.log(e);
     console.log("Symbol", this.symbol);
     console.log("bps", this.bps);
+
+    debugger;
     const ticketData = {
       symbol: this.symbol,
       bps: this.bps,
@@ -116,56 +169,6 @@ export default class ticketForm extends Vue {
     console.log("ticket data", ticketData);
     this.submitForm(ticketData);
   }
-
-  // data() {
-  //   return {
-  //     symbol: null,
-  //     bps: null,
-  //     targetBps: null,
-  //     quantity: null,
-  //     notional: null,
-  //     orderType: null,
-  //     price: null,
-  //     strat1: null,
-  //     strat2: null,
-  //     type: null,
-  //     portfolio: null,
-  //     isSwap: null
-  //   };
-  // },
-  // computed: {
-  //   ...mapState(["formSchema"])
-  // },
-  // methods: {
-  //   ...mapActions(["submitForm"]),
-  //   handleSubmit(e) {
-  //     e.preventDefault();
-  //     console.log(e);
-  //     console.log("Symbol", this.symbol);
-  //     console.log("bps", this.bps);
-  //     const ticketData = {
-  //       symbol: this.symbol,
-  //       bps: this.bps,
-  //       targetBps: this.targetBps,
-  //       quantity: this.quantity,
-  //       notional: this.notional,
-  //       orderType: this.orderType,
-  //       price: this.price,
-  //       strat1: this.strat1,
-  //       strat2: this.strat2,
-  //       type: this.type,
-  //       portfolio: this.portfolio,
-  //       isSwap: this.isSwap
-  //     };
-  //     console.log("ticket data", ticketData);
-  //     this.submitForm(ticketData);
-  //   }
-  // }
-
-  // @Watch("symbol")
-  // onSymbolChange() {
-  //   console.log(this.symbol);
-  // }
 }
 </script>
 

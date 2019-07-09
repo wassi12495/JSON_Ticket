@@ -23,12 +23,12 @@ let validate = ajv.compile(formSchema);
 
 let schema = formSchema;
 
-router.get('/', (req, res) => {
+router.get('/schema', (req, res) => {
   res.send(schema);
 });
 
 // Test schema reciever - just returns the schema with the default functional dataset
-router.get('/schema', (req, res) => {
+router.get('/schema/test', (req, res) => {
   let valid = validate(dataSample);
   console.log(valid);
   if (!valid) console.log(validate);

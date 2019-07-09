@@ -3,7 +3,7 @@
 
     <h1>Ticket</h1>
     <button @click="onClick">click this</button>
-    <TicketForm/>
+    <TicketForm v-if="this.formSchema"/>
 
   </div>
 </template>
@@ -22,11 +22,15 @@ import TicketForm from "../components/ticketForm.vue";
 })
 export default class Ticket extends Vue {
   @Action("getSchema") getSchema: any;
+  @Action("testSchema") testSchema: any;
   @State("formSchema") formSchema: any;
   @State("miscAsync") miscAsync: any;
 
-  onClick(e: any) {
+  created() {
     this.getSchema();
+  }
+  onClick(e: any) {
+    this.testSchema();
   }
   @Watch("miscAsync")
   onFormSchemaChange() {

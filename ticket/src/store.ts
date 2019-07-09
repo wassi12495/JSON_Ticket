@@ -30,6 +30,18 @@ export default new Vuex.Store({
           commit('formSchema', res);
         });
     },
+    testSchema({ commit }: any) {
+      commit('miscAsyncInProgress');
+
+      fetch('http://localhost:9000/schema/test')
+        .then(res => {
+          return res.json();
+        })
+        .then(res => {
+          console.log(res);
+          commit('formSchema', res);
+        });
+    },
     submitForm({ commit }: any, data: any) {
       // commit('miscAsyncInProgress');
       fetch('http://localhost:9000/ticket/new', {
