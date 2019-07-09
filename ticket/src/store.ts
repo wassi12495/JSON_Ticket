@@ -32,7 +32,7 @@ export default new Vuex.Store({
     },
     submitForm({ commit }: any, data: any) {
       // commit('miscAsyncInProgress');
-      fetch('http://localhost:9000/ticket', {
+      fetch('http://localhost:9000/ticket/new', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

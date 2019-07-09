@@ -41,15 +41,15 @@
       "enum": ["sub C", "sub D"]
     },
     "instructions": {
-      "type": "",
+      "type": "string",
       "description": ""
     },
     "gtc": {
-      "type": "",
+      "type": "string",
       "description": ""
     },
     "isSwap": {
-      "type": "text",
+      "type": "string",
       "description": "",
       "enum": ["yes", "no"]
     },
@@ -59,11 +59,11 @@
       "enum": ["BUY", "COVER", "SELL", "SHORT"]
     },
     "portfolio": {
-      "type": "",
+      "type": "object",
       "description": ""
     },
     "uniqueStrategy": {
-      "type": "",
+      "type": "object",
       "description": ""
     }
   },
