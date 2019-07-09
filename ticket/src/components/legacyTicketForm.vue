@@ -82,85 +82,52 @@ export default class ticketForm extends Vue {
   @State("formSchema") formSchema: any;
   @Action("submitForm") submitForm: any;
 
-  private symbol: any = null;
-  private bps: any = null;
-  private targetBps: any = null;
-  private quantity: any = null;
-  private notional: any = null;
-  private orderType: any = null;
-  private price: any = null;
-  private strat1: any = null;
-  private strat2: any = null;
-  private type: any = null;
-  private portfolio: any = null;
-  private isSwap: any = null;
-  handleSubmit(e: any) {
-    e.preventDefault();
-    console.log(e);
-    console.log("Symbol", this.symbol);
-    console.log("bps", this.bps);
-    const ticketData = {
-      symbol: this.symbol,
-      bps: this.bps,
-      targetBps: this.targetBps,
-      quantity: this.quantity,
-      notional: this.notional,
-      orderType: this.orderType,
-      price: this.price,
-      strat1: this.strat1,
-      strat2: this.strat2,
-      type: this.type,
-      portfolio: this.portfolio,
-      isSwap: this.isSwap
-    };
-    console.log("ticket data", ticketData);
-    this.submitForm(ticketData);
-  }
+  
 
-  // data() {
-  //   return {
-  //     symbol: null,
-  //     bps: null,
-  //     targetBps: null,
-  //     quantity: null,
-  //     notional: null,
-  //     orderType: null,
-  //     price: null,
-  //     strat1: null,
-  //     strat2: null,
-  //     type: null,
-  //     portfolio: null,
-  //     isSwap: null
-  //   };
-  // },
-  // computed: {
-  //   ...mapState(["formSchema"])
-  // },
-  // methods: {
-  //   ...mapActions(["submitForm"]),
-  //   handleSubmit(e) {
-  //     e.preventDefault();
-  //     console.log(e);
-  //     console.log("Symbol", this.symbol);
-  //     console.log("bps", this.bps);
-  //     const ticketData = {
-  //       symbol: this.symbol,
-  //       bps: this.bps,
-  //       targetBps: this.targetBps,
-  //       quantity: this.quantity,
-  //       notional: this.notional,
-  //       orderType: this.orderType,
-  //       price: this.price,
-  //       strat1: this.strat1,
-  //       strat2: this.strat2,
-  //       type: this.type,
-  //       portfolio: this.portfolio,
-  //       isSwap: this.isSwap
-  //     };
-  //     console.log("ticket data", ticketData);
-  //     this.submitForm(ticketData);
-  //   }
-  // }
+  data() {
+    return {
+      symbol: null,
+      bps: null,
+      targetBps: null,
+      quantity: null,
+      notional: null,
+      orderType: null,
+      price: null,
+      strat1: null,
+      strat2: null,
+      type: null,
+      portfolio: null,
+      isSwap: null
+    };
+  },
+  computed: {
+    ...mapState(["formSchema"])
+  },
+  methods: {
+    ...mapActions(["submitForm"]),
+    handleSubmit(e) {
+      e.preventDefault();
+      console.log(e);
+      console.log("Symbol", this.symbol);
+      console.log("bps", this.bps);
+      const ticketData = {
+        symbol: this.symbol,
+        bps: this.bps,
+        targetBps: this.targetBps,
+        quantity: this.quantity,
+        notional: this.notional,
+        orderType: this.orderType,
+        price: this.price,
+        strat1: this.strat1,
+        strat2: this.strat2,
+        type: this.type,
+        portfolio: this.portfolio,
+        isSwap: this.isSwap
+      };
+      console.log("ticket data", ticketData);
+      this.submitForm(ticketData);
+    }
+  }
 
   // @Watch("symbol")
   // onSymbolChange() {
