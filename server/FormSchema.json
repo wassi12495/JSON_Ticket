@@ -67,5 +67,8 @@
       "description": ""
     }
   },
-  "required": ["symbol", "bps", "targetBps"]
+  "required": ["symbol", "bps", "targetBps"],
+  "dependencies": {
+    "strategy2": ["strategy1"]
+  }
 }

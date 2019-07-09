@@ -7,6 +7,12 @@ let dataSample = {
   symbol: 'goog',
   bps: 2,
   targetBps: 3,
+  quantity: 1000,
+  notional: 1,
+  orderType: 'LMT',
+  price: 200,
+  strategy1: 'sub A',
+  strategy2: 'sub C',
 };
 
 // validation schema
