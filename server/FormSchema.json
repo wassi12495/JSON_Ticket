@@ -49,9 +49,8 @@
       "description": ""
     },
     "isSwap": {
-      "type": "string",
-      "description": "",
-      "enum": ["yes", "no"]
+      "type": "boolean",
+      "description": ""
     },
     "tradeType": {
       "type": "string",

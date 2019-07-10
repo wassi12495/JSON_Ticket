@@ -34,8 +34,8 @@
         </div>
       </div>
       <div class="row">
-        <div class="form-group">
-          <label for="orderType">orderType</label>
+        <div class="form-group col">
+          <label for="orderType">Order Type</label>
           <select class="form-control" v-model="orderType" required>
             <option disabled value="null">Please select one</option>
             <option v-for="option in orderTypeOptions" v-bind:value="option" v-bind:key="option.index">{{option}}</option>
@@ -45,7 +45,7 @@
         <div class="form-group col">
           <label for="strat1">Strategy 1</label>
           <select class="form-control" v-model="strat1" >
-            <option selected disabled value="">Please select one</option>
+            <option selected disabled value="null">Please select one</option>
             <option v-for="option in strategy_1_Options" v-bind:value="option" v-bind:key="option.index">{{option}}</option>
           </select>
 
@@ -53,14 +53,14 @@
         <div class="form-group col">
           <label for="strat2">Strategy 2</label>
           <select class="form-control" v-model="strat2" >
-            <option selected disabled value="">Please select one</option>
+            <option selected disabled value="null">Please select one</option>
             <option v-for="option in strategy_2_Options" v-bind:value="option" v-bind:key="option.index">{{option}}</option>
           </select>
         </div>
         <div class="form-group col">
           <label for="type">Trade Type</label>
           <select class="form-control" v-model="type" >
-            <option selected disabled value="">Please select one</option>
+            <option selected disabled value="null">Please select one</option>
             <option v-for="option in tradeTypeOptions" v-bind:value="option" v-bind:key="option.index">{{option}}</option>
           </select>
         </div>
@@ -71,8 +71,16 @@
           <input class="form-control" type="text" v-model="portfolio">
         </div>
         <div class="form-group col-sm-4">
-          <label for="isSwap"> isSwap </label>
-          <input class="form-control" type="text" v-model="isSwap">
+          <label for="isSwap"> Is this trade a Swap?:  </label>
+          <br>
+          <div class="form-check">
+           <input class="form-check-input" type="radio" id="isSwap-true" v-model="isSwap" value="true">
+           <label for="isSwap-true">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" id="isSwap-false" v-model="isSwap" value="false">
+            <label for="isSwap-false">No</label>
+          </div>
         </div> 
                  
       </div>
