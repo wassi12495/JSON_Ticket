@@ -10,34 +10,34 @@
       <div class="row">
         <div class="form-group col">
           <label for="last">bps: </label>
-          <input type="number" class="form-control" id="bps" placeholder="bps" v-model="bps" required>
+          <input type="number" class="form-control" id="bps" placeholder="bps" v-model.number="bps" required>
         </div>
         <div class="form-group col">
           <label for="tgtBps">tgtBps: </label>   
-          <input type="number" class="form-control" id="tgtBps" placeholder="tgtBps" v-model="targetBps"/>
+          <input type="number" class="form-control" id="tgtBps" placeholder="tgtBps" v-model.number="targetBps"/>
 
         </div>
         <div class="form-group col">
           <label for="quantity">quantity: </label>  
-          <input type="number" class="form-control" id="quantity" placeholder="0" v-model="quantity"/>
+          <input type="number" class="form-control" id="quantity" placeholder="0" v-model.number="quantity"/>
 
         </div>
         <div class="form-group col">
           <label for="notional">notional: </label>
-          <input type="number" class="form-control" id="notional" placeholder="notional" v-model="notional"/>
+          <input type="number" class="form-control" id="notional" placeholder="notional" v-model.number="notional"/>
 
         </div>
         <div class="form-group col">
           <label for="price">Price: </label>
-          <input type="number" class="form-control" placeholder="$" v-model="price">
+          <input type="number" class="form-control" placeholder="$" v-model.number="price">
 
         </div>
       </div>
       <div class="row">
         <div class="form-group col">
           <label for="orderType">Order Type</label>
-          <select class="form-control" v-model="orderType" required>
-            <option disabled value="null">Please select one</option>
+          <select  class="form-control" v-model="orderType" required>
+            <option selected disabled value="" >Please select one</option>
             <option v-for="option in orderTypeOptions" v-bind:value="option" v-bind:key="option.index">{{option}}</option>
           </select>
         </div>
@@ -45,7 +45,7 @@
         <div class="form-group col">
           <label for="strat1">Strategy 1</label>
           <select class="form-control" v-model="strat1" >
-            <option selected disabled value="null">Please select one</option>
+            <option selected disabled value="">Please select one</option>
             <option v-for="option in strategy_1_Options" v-bind:value="option" v-bind:key="option.index">{{option}}</option>
           </select>
 
@@ -53,14 +53,14 @@
         <div class="form-group col">
           <label for="strat2">Strategy 2</label>
           <select class="form-control" v-model="strat2" >
-            <option selected disabled value="null">Please select one</option>
+            <option selected disabled value="">Please select one</option>
             <option v-for="option in strategy_2_Options" v-bind:value="option" v-bind:key="option.index">{{option}}</option>
           </select>
         </div>
         <div class="form-group col">
-          <label for="type">Trade Type</label>
-          <select class="form-control" v-model="type" >
-            <option selected disabled value="null">Please select one</option>
+          <label for="tradeType">Trade Type</label>
+          <select required class="form-control" v-model="tradeType" >
+            <option selected disabled value="">Please select one</option>
             <option v-for="option in tradeTypeOptions" v-bind:value="option" v-bind:key="option.index">{{option}}</option>
           </select>
         </div>
@@ -106,11 +106,26 @@ export default class ticketForm extends Vue {
   @State("formSchema") formSchema: any;
   @Action("getSchema") getSchema: any;
   @Action("submitForm") submitForm: any;
-  private schema: any;
-  private orderTypeOptions: any = [];
-  private strategy_1_Options: any = [];
-  private strategy_2_Options: any = [];
-  private tradeTypeOptions: any = [];
+
+  schema: any;
+  orderTypeOptions: any = [];
+  strategy_1_Options: any = [];
+  strategy_2_Options: any = [];
+  tradeTypeOptions: any = [];
+  ticketData: any = {};
+
+  symbol: string = null;
+  bps: number = null;
+  targetBps: number = null;
+  quantity: number = null;
+  notional: number = null;
+  orderType: string = "";
+  price: number = null;
+  strat1: string = "";
+  strat2: string = "";
+  tradeType: string = "";
+  portfolio: string = null;
+  isSwap: boolean = false;
 
   created() {
     this.schema = this.formSchema.properties;
@@ -121,45 +136,7 @@ export default class ticketForm extends Vue {
     this.strategy_1_Options = this.schema.strategy1.enum;
     this.strategy_2_Options = this.schema.strategy2.enum;
     this.tradeTypeOptions = this.schema.tradeType.enum;
-
-    // for (const [key, value] of properties) {
-    //   console.log(key);
-    //   debugger;
-    //   // console.log(this.$data.);
-
-    //   this.validateInitVariableType(value.type);
-    //   debugger;
-    // }
-
-    // debugger;
   }
-  // mounted(){
-  //   let properties = Object.entries(this.schema);
-  //   for (const [key, value] of properties) {
-  //     console.log(key);
-  //     let formInputForKey = document.getElementById(`${key}`)
-  //     debugger;
-  //     // console.log(this.$data.);
-
-  //     this.validateInitVariableType(value.type, formInputForKey.);
-  //     debugger;
-  //   }
-
-  //   debugger;
-  // }
-
-  private symbol: any = null;
-  private bps: any = null;
-  private targetBps: any = null;
-  private quantity: any = null;
-  private notional: any = null;
-  private orderType: any = null;
-  private price: any = null;
-  private strat1: any = null;
-  private strat2: any = null;
-  private type: any = null;
-  private portfolio: any = null;
-  private isSwap: any = null;
 
   validateInitVariableType(expectation: any, reality: any) {
     console.log("Expectation", expectation);
@@ -178,30 +155,90 @@ export default class ticketForm extends Vue {
   onFormSchema() {
     console.log("Form Schema recieved", this.formSchema);
   }
+  @Watch("symbol")
+  handleSymbolChange(e: any) {
+    console.log("Handle change", typeof e);
+    this.ticketData["symbol"] = e;
+  }
+  @Watch("bps")
+  handleBpsChange(e: any) {
+    console.log("Handle change", typeof e);
+    this.ticketData["bps"] = e;
+  }
+  @Watch("tgtBps")
+  handleTgtBpsChange(e: any) {
+    console.log("Handle change", typeof e);
+    this.ticketData["tgtBps"] = e;
+  }
+  @Watch("quantity")
+  handleQuantityChange(e: any) {
+    console.log("Handle change", typeof e);
+    this.ticketData["quantity"] = e;
+  }
+  @Watch("notional")
+  handleNotionalChange(e: any) {
+    console.log("Handle change", typeof e);
+    this.ticketData["notional"] = e;
+  }
+  @Watch("price")
+  handlePriceChange(e: any) {
+    console.log("Handle change", typeof e);
+    this.ticketData["price"] = e;
+  }
+  @Watch("orderType")
+  handleOrderTypeChange(e: any) {
+    console.log("Handle change", typeof e);
+    this.ticketData["orderType"] = e;
+  }
+  @Watch("strat1")
+  handleStrategy1Change(e: any) {
+    console.log("Handle change", typeof e);
+    this.ticketData["strategy1"] = e;
+  }
+  @Watch("strat2")
+  handleStrategy2Change(e: any) {
+    console.log("Handle change", typeof e);
+    this.ticketData["strategy2"] = e;
+  }
+  @Watch("tradeType")
+  handleTradeTypeChange(e: any) {
+    console.log("Handle change", typeof e);
+    this.ticketData["tradeType"] = e;
+  }
+  @Watch("portfolio")
+  handlePortfolioChange(e: any) {
+    console.log("Handle change", typeof e);
+    this.ticketData["portfolio"] = e;
+  }
+  @Watch("isSwap")
+  handleIsSwapChange(e: any) {
+    console.log("Handle change", typeof e);
+    this.ticketData["isSwap"] = e;
+  }
 
   handleSubmit(e: any) {
     e.preventDefault();
     console.log(e);
     console.log("Symbol", this.symbol);
     console.log("bps", this.bps);
-
+    this.ticketData["isSwap"] = this.isSwap;
+    // const ticketData = {
+    //   symbol: this.symbol,
+    //   bps: this.bps,
+    //   targetBps: this.targetBps,
+    //   quantity: this.quantity,
+    //   notional: this.notional,
+    //   orderType: this.orderType,
+    //   price: this.price,
+    //   strat1: this.strat1,
+    //   strat2: this.strat2,
+    //   type: this.type,
+    //   portfolio: this.portfolio,
+    //   isSwap: this.isSwap
+    // };
+    console.log("ticket data", this.ticketData);
     debugger;
-    const ticketData = {
-      symbol: this.symbol,
-      bps: this.bps,
-      targetBps: this.targetBps,
-      quantity: this.quantity,
-      notional: this.notional,
-      orderType: this.orderType,
-      price: this.price,
-      strat1: this.strat1,
-      strat2: this.strat2,
-      type: this.type,
-      portfolio: this.portfolio,
-      isSwap: this.isSwap
-    };
-    console.log("ticket data", ticketData);
-    this.submitForm(ticketData);
+    this.submitForm(this.ticketData);
   }
 }
 </script>
