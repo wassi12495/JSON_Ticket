@@ -23,7 +23,7 @@
     },
     "orderType": {
       "type": "string",
-      "description": "Order Type",
+      "description": "Order Type -- Options in 'enum' atttribute will redner dynamically within the form as dropdown options.",
       "enum": ["LMT", "MKT"]
     },
     "price": {

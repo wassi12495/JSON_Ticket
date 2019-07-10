@@ -1,62 +1,78 @@
 <template>
   <div class="container">
     <form action @submit="handleSubmit($event)">
+      <div class="form-group row">
+        <div class="">
+          <label class="col-sm-2 col-form-label" for="first">Symbol: </label>   
+          <input type="text" class="form-control-plaintext col-sm-10" id="symbol" placeholder="Symbol" v-model="symbol" required>
+        </div>
+      </div>
       <div class="row">
         <div class="form-group col">
-          <label for="first">Symbol: </label>   
-          <input type="text" class="form-control" id="symbol" placeholder="Symbol" v-model="symbol" required>
-        </div>
-        <div class="form-group col">
           <label for="last">bps: </label>
-          <input type="text" class="form-control" id="bps" placeholder="bps" v-model="bps" required>
+          <input type="number" class="form-control" id="bps" placeholder="bps" v-model="bps" required>
         </div>
         <div class="form-group col">
           <label for="tgtBps">tgtBps: </label>   
-          <input type="text" class="form-control" placeholder="tgtBps" v-model="targetBps"/>
+          <input type="number" class="form-control" id="tgtBps" placeholder="tgtBps" v-model="targetBps"/>
 
         </div>
         <div class="form-group col">
           <label for="quantity">quantity: </label>  
-          <input type="text" v-model="quantity"/>
+          <input type="number" class="form-control" id="quantity" placeholder="0" v-model="quantity"/>
 
         </div>
         <div class="form-group col">
           <label for="notional">notional: </label>
-          <input type="text" v-model="notional"/>
+          <input type="number" class="form-control" id="notional" placeholder="notional" v-model="notional"/>
 
         </div>
         <div class="form-group col">
+          <label for="price">Price: </label>
+          <input type="number" class="form-control" placeholder="$" v-model="price">
 
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
           <label for="orderType">orderType</label>
-          <input type="text" v-model="orderType"/>
+          <select class="form-control" v-model="orderType" required>
+            <option disabled value="null">Please select one</option>
+            <option v-for="option in orderTypeOptions" v-bind:value="option" v-bind:key="option.index">{{option}}</option>
+          </select>
         </div>
+               
         <div class="form-group col">
-          <label for="price">price</label>
-          <input type="text" v-model="price">
+          <label for="strat1">Strategy 1</label>
+          <select class="form-control" v-model="strat1" >
+            <option selected disabled value="">Please select one</option>
+            <option v-for="option in strategy_1_Options" v-bind:value="option" v-bind:key="option.index">{{option}}</option>
+          </select>
 
         </div>
         <div class="form-group col">
-          <label for="strat1">strat1</label>
-          <input type="text" v-model="strat1">
-
+          <label for="strat2">Strategy 2</label>
+          <select class="form-control" v-model="strat2" >
+            <option selected disabled value="">Please select one</option>
+            <option v-for="option in strategy_2_Options" v-bind:value="option" v-bind:key="option.index">{{option}}</option>
+          </select>
         </div>
         <div class="form-group col">
-          <label for="strat2">strat2</label>
-          <input type="text" v-model="strat2">
-
+          <label for="type">Trade Type</label>
+          <select class="form-control" v-model="type" >
+            <option selected disabled value="">Please select one</option>
+            <option v-for="option in tradeTypeOptions" v-bind:value="option" v-bind:key="option.index">{{option}}</option>
+          </select>
         </div>
-        <div class="form-group col">
-
-          <label for="type">type</label>
-          <input type="text" v-model="type">
+      </div> 
+      <div class="row">         
+        <div class="form-group col-sm-4">
+          <label for="portfolio"> Portfolio </label>
+          <input class="form-control" type="text" v-model="portfolio">
         </div>
-        <div class="form-control col">
-          <label for="portfolio">portfolio</label>
-          <input type="text" v-model="portfolio">
-        </div>          
-        <div class="form-control col">
-          <label for="isSwap">isSwap</label>
-          <input type="text" v-model="isSwap">
+        <div class="form-group col-sm-4">
+          <label for="isSwap"> isSwap </label>
+          <input class="form-control" type="text" v-model="isSwap">
         </div> 
                  
       </div>
@@ -83,11 +99,21 @@ export default class ticketForm extends Vue {
   @Action("getSchema") getSchema: any;
   @Action("submitForm") submitForm: any;
   private schema: any;
+  private orderTypeOptions: any = [];
+  private strategy_1_Options: any = [];
+  private strategy_2_Options: any = [];
+  private tradeTypeOptions: any = [];
 
   created() {
     this.schema = this.formSchema.properties;
     console.log("created ticket form", this.schema);
-    // let properties = Object.entries(this.schema);
+    let properties = Object.entries(this.schema);
+    console.log(this.schema.orderType.enum);
+    this.orderTypeOptions = this.schema.orderType.enum;
+    this.strategy_1_Options = this.schema.strategy1.enum;
+    this.strategy_2_Options = this.schema.strategy2.enum;
+    this.tradeTypeOptions = this.schema.tradeType.enum;
+
     // for (const [key, value] of properties) {
     //   console.log(key);
     //   debugger;
