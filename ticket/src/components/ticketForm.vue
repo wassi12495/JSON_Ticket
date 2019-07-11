@@ -165,10 +165,10 @@ export default class ticketForm extends Vue {
     console.log("Handle change", typeof e);
     this.ticketData["bps"] = e;
   }
-  @Watch("tgtBps")
+  @Watch("targetBps")
   handleTgtBpsChange(e: any) {
     console.log("Handle change", typeof e);
-    this.ticketData["tgtBps"] = e;
+    this.ticketData["targetBps"] = e;
   }
   @Watch("quantity")
   handleQuantityChange(e: any) {
