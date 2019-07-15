@@ -3,6 +3,7 @@ import Vuex, { Store } from 'vuex';
 
 Vue.use(Vuex);
 
+const URL = 'http://localhost:9000';
 export default new Vuex.Store({
   state: {
     formSchema: null,
@@ -30,8 +31,12 @@ export default new Vuex.Store({
       state.ticketValid = false;
       state.ticketErrors = errors;
     },
+    setTickets: (state: any, tickets: any) => {
+      state.tickets = tickets;
+    },
   },
   actions: {
+    //  -------- SCHEMA HANDLING ---------
     getSchema({ commit }: any) {
       commit('miscAsyncInProgress');
 
@@ -58,6 +63,22 @@ export default new Vuex.Store({
           commit('miscAsyncCompleted');
         });
     },
+    // ------------- TICKET HANDLING ---------
+
+    // Simple GET fetch list of tickets stored in the server
+    getTickets({ commit }: any) {
+      console.log('Called getTickets');
+      commit('miscAsyncInProgress');
+      fetch(`${URL}/tickets`)
+        .then((resp) => {
+          return resp.json();
+        })
+        .then((resp) => {
+          console.log('Fetch list of tickets, at init should be empty', resp);
+          commit('setTickets', resp);
+        });
+    },
+
     submitForm({ commit }: any, data: any) {
       commit('miscAsyncInProgress');
       fetch('http://localhost:9000/ticket/new', {
@@ -82,7 +103,6 @@ export default new Vuex.Store({
             commit('ticketInvalid', errorMessage);
             console.log('Ticket is Invalid, error messages added to store.');
           }
-          debugger;
           commit('miscAsyncCompleted');
         });
     },

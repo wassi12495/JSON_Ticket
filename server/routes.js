@@ -15,6 +15,7 @@ let dataSample = {
   strategy2: 'sub C',
 };
 
+let tickets = [];
 // validation schema
 let Ajv = require('ajv');
 let ajv = new Ajv();
@@ -47,9 +48,16 @@ router.post('/ticket/new', (req, res) => {
     res.send(validate.errors);
   } else {
     body['valid'] = true;
-    console.log(body);
+    tickets.push(body);
+    console.log('Valid Ticket', body);
+    console.log('Tickets array', tickets);
     res.send(body);
   }
+});
+
+router.get('/tickets', (req, resp) => {
+  console.log('Get Tickets called');
+  resp.send(tickets);
 });
 module.exports = {
   router,
