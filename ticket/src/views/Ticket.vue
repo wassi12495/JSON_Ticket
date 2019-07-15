@@ -52,6 +52,11 @@ export default class Ticket extends Vue {
       console.log("The ticket was not valid", this.ticketErrors);
     }
   }
+  @Watch("ticketErrors")
+  handleTicketErrors() {
+    console.log("Handle Ticet Errors watcher", this.ticketErrors);
+    debugger;
+  }
 }
 </script>
 
