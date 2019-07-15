@@ -25,6 +25,8 @@ export default class Ticket extends Vue {
   @Action("testSchema") testSchema: any;
   @State("formSchema") formSchema: any;
   @State("miscAsync") miscAsync: any;
+  @State("ticketValid") ticketValid: any;
+  @State("ticketErrors") ticketErrors: any;
 
   created() {
     this.getSchema();
@@ -34,7 +36,21 @@ export default class Ticket extends Vue {
   }
   @Watch("miscAsync")
   onFormSchemaChange() {
-    console.log(this.formSchema);
+    if (this.miscAsync === false) {
+      console.log(this.formSchema);
+    }
+  }
+  @Watch("ticketValid")
+  handleTicketValidity() {
+    console.log("Ticket Valid - ", this.ticketValid);
+    console.log("Ticket Errors - ", this.ticketErrors);
+    // debugger;
+    if (this.ticketValid) {
+      console.log("Ticket is valid, pushing to `/`.");
+      this.$router.push("/");
+    } else {
+      console.log("The ticket was not valid", this.ticketErrors);
+    }
   }
 }
 </script>

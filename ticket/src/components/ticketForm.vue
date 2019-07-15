@@ -106,6 +106,8 @@ export default class ticketForm extends Vue {
   @State("formSchema") formSchema: any;
   @Action("getSchema") getSchema: any;
   @Action("submitForm") submitForm: any;
+  @State("ticketValid") ticketValid: any;
+  @State("ticketErrors") ticketErrors: any;
 
   schema: any;
   orderTypeOptions: any = [];
@@ -222,22 +224,8 @@ export default class ticketForm extends Vue {
     console.log("Symbol", this.symbol);
     console.log("bps", this.bps);
     this.ticketData["isSwap"] = this.isSwap;
-    // const ticketData = {
-    //   symbol: this.symbol,
-    //   bps: this.bps,
-    //   targetBps: this.targetBps,
-    //   quantity: this.quantity,
-    //   notional: this.notional,
-    //   orderType: this.orderType,
-    //   price: this.price,
-    //   strat1: this.strat1,
-    //   strat2: this.strat2,
-    //   type: this.type,
-    //   portfolio: this.portfolio,
-    //   isSwap: this.isSwap
-    // };
+
     console.log("ticket data", this.ticketData);
-    debugger;
     this.submitForm(this.ticketData);
   }
 }

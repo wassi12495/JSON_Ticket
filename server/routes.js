@@ -46,6 +46,8 @@ router.post('/ticket/new', (req, res) => {
     console.log(validate);
     res.send(validate.errors);
   } else {
+    body['valid'] = true;
+    console.log(body);
     res.send(body);
   }
 });
