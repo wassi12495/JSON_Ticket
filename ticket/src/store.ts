@@ -75,7 +75,9 @@ export default new Vuex.Store({
         })
         .then((resp) => {
           console.log('Fetch list of tickets, at init should be empty', resp);
-          commit('setTickets', resp);
+          if (resp.length !== 0) {
+            commit('setTickets', resp);
+          }
         });
     },
 
