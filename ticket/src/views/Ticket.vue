@@ -2,8 +2,10 @@
   <div>
 
     <h1>Ticket</h1>
+    <TicketErrors/>
     <button @click="onClick">click this</button>
     <TicketForm v-if="this.formSchema"/>
+
 
   </div>
 </template>
@@ -14,10 +16,13 @@ import Component from "vue-class-component";
 import { State, Getter, Action, Mutation } from "vuex-class";
 import { Watch } from "vue-property-decorator";
 
+import TicketErrors from "../components/ticketErrors.vue";
 import TicketForm from "../components/ticketForm.vue";
+
 @Component({
   components: {
-    TicketForm
+    TicketForm,
+    TicketErrors
   }
 })
 export default class Ticket extends Vue {
