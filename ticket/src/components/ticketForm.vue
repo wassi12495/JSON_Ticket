@@ -74,12 +74,9 @@
           <label for="isSwap"> Is this trade a Swap?:  </label>
           <br>
           <div class="form-check">
-           <input class="form-check-input" type="radio" id="isSwap-true" v-model="isSwap" value="true">
+           <input class="form-check-input" type="checkbox" id="isSwap-true" v-model="isSwap"  >
            <label for="isSwap-true">Yes</label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" id="isSwap-false" v-model="isSwap" value="false">
-            <label for="isSwap-false">No</label>
+    
           </div>
         </div> 
                  
@@ -216,6 +213,13 @@ export default class ticketForm extends Vue {
   handleIsSwapChange(e: any) {
     console.log("Handle change", typeof e);
     this.ticketData["isSwap"] = e;
+    // if (e === "true") {
+    //   this.ticketData["isSwap"] = null;
+    //   this.ticketData["isSwap"] = true;
+    // } else {
+    //   this.ticketData["isSwap"] = null;
+    //   this.ticketData["isSwap"] = false;
+    // }
   }
 
   handleSubmit(e: any) {

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <p>Errors</p>
+    <p id="error1">
+      {{this.errors}}
+    </p>
   </div>
   
 </template>
@@ -9,10 +11,15 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { State, Getter, Action, Mutation } from "vuex-class";
-import { Watch } from "vue-property-decorator";
+import { Watch, Prop } from "vue-property-decorator";
 
-@Component
-export default class TicketErrors extends Vue {}
+@Component({})
+export default class TicketErrors extends Vue {
+  @Prop() errors: string;
+  created() {
+    console.log("Errors message", this.errors);
+  }
+}
 </script>
 
 <style>
