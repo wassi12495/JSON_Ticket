@@ -2,7 +2,7 @@
   <div>
 
     <h1>Ticket</h1>
-    <TicketErrors/>
+    <TicketErrors v-if="this.ticketErrors !== null"/>
     <button @click="onClick">click this</button>
     <TicketForm v-if="this.formSchema"/>
 
@@ -59,8 +59,10 @@ export default class Ticket extends Vue {
   }
   @Watch("ticketErrors")
   handleTicketErrors() {
-    console.log("Handle Ticet Errors watcher", this.ticketErrors);
-    debugger;
+    if (this.ticketErrors !== null) {
+      console.log("Handle Ticet Errors watcher", this.ticketErrors);
+      debugger;
+    }
   }
 }
 </script>
